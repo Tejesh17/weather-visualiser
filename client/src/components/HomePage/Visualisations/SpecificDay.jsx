@@ -2,15 +2,10 @@ import { useEffect, useState } from 'react'
 import weatherData from '../../../constants/WeatherData'
 import EChartsReact from 'echarts-for-react'
 
-const dropdownOptions = [
-    "2018-02-19",
-    "2018-02-20",
-    "2018-02-21",
-]
+const dropdownOptions = ['2018-02-19', '2018-02-20', '2018-02-21']
 const SpecificDay = () => {
     const [specificDayData, setSpecificDayData] = useState({})
 
-    
     const getSpecificDayData = async () => {
         const data = weatherData.list.filter(
             (d) => (d.dt_txt = '2018-02-20')
@@ -50,34 +45,32 @@ const SpecificDay = () => {
 
     return (
         <>
-        <div className='flex flex-row   justifycenter'>
+            <div className="flex flex-row   justifycenter">
+                <select
+                    className="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                    // value={selectedOption}
+                    // onChange={handleOptionChange}
+                    placeholder="Select a date"
+                >
+                    <option value="" disabled>
+                        Select a date
+                    </option>
+                    {dropdownOptions.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+                <div className="flex items-center justify-center mt-4">
+                    <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                    >
+                        Go
+                    </button>
+                </div>
+            </div>
 
-          <select
-            className="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-            // value={selectedOption}
-            // onChange={handleOptionChange}
-            placeholder="Select a date"
-          >
-
-            <option value="" disabled>
-              Select a date
-            </option>
-            {dropdownOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <div className="flex items-center justify-center mt-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-            Go
-            </button>
-          </div>
-        </div>
-            
             <EChartsReact option={specificDayData} />
         </>
     )

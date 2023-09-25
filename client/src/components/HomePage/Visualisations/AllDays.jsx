@@ -13,11 +13,11 @@ const AllDays = () => {
         //     }
         // })
         let data = {}
-        try{
-            data = await fetch("http://localhost:5000/weather")
+        try {
+            data = await fetch('http://localhost:5000/weather')
             data = await data.json()
-        }catch(e){
-            console.log("error", e )
+        } catch (e) {
+            console.log('error', e)
         }
 
         console.log(data)
