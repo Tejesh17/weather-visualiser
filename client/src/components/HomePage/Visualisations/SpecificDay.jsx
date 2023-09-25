@@ -26,6 +26,7 @@ const SpecificDay = () => {
             },
             yAxis: {
                 type: 'value',
+                min: 275
             },
             series: [
                 {
