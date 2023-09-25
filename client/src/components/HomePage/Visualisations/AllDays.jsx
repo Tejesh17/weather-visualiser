@@ -24,8 +24,8 @@ const AllDays = () => {
         const options = {
             xAxis: {
                 type: 'category',
-                data: data.list.map((d) => d.dt_txt.slice(0, 10)),
-                // data: data.map((d) => d.date.slice(0, 10)),
+                data: data.list.map((d) => d.dt_txt),
+                // data: data.map((d) => d.date),
             },
             yAxis: {
                 type: 'value',

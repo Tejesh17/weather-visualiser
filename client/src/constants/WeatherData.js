@@ -34,7 +34,7 @@ const weatherData = {
             sys: {
                 pod: 'd',
             },
-            dt_txt: '2018-02-19 21:00:00',
+            dt_txt: '2018-02-19',
         },
         {
             dt: 1519084800,
@@ -67,7 +67,7 @@ const weatherData = {
             sys: {
                 pod: 'n',
             },
-            dt_txt: '2018-02-20 00:00:00',
+            dt_txt: '2018-02-20',
         },
         {
             dt: 1519095600,
@@ -100,7 +100,7 @@ const weatherData = {
             sys: {
                 pod: 'n',
             },
-            dt_txt: '2018-02-20 03:00:00',
+            dt_txt: '2018-02-20',
         },
     ],
 }

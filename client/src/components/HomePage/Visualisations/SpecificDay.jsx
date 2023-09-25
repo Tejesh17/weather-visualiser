@@ -3,7 +3,9 @@ import weatherData from '../../../constants/WeatherData'
 import EChartsReact from 'echarts-for-react'
 
 const dropdownOptions = [
-    "2018-02-20 00:00:00"
+    "2018-02-19",
+    "2018-02-20",
+    "2018-02-21",
 ]
 const SpecificDay = () => {
     const [specificDayData, setSpecificDayData] = useState({})
@@ -11,12 +13,12 @@ const SpecificDay = () => {
     
     const getSpecificDayData = async () => {
         const data = weatherData.list.filter(
-            (d) => (d.dt_txt = '2018-02-20 00:00:00')
+            (d) => (d.dt_txt = '2018-02-20')
         )[0]
 
         const option = {
             xAxis: {
-                data: [data.dt_txt.slice(0, 10)],
+                data: [data.dt_txt],
             },
             yAxis: {
                 min: 280,
@@ -68,7 +70,7 @@ const SpecificDay = () => {
           </select>
           <div className="flex items-center justify-center mt-4">
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-600 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
             Go
