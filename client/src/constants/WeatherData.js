@@ -100,7 +100,7 @@ const weatherData = {
             sys: {
                 pod: 'n',
             },
-            dt_txt: '2018-02-20',
+            dt_txt: '2018-02-21',
         },
     ],
 }

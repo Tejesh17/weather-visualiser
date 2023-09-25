@@ -41,7 +41,7 @@ weather_data = {
             "main": {
                 "temp": 282.64,
                 "temp_min": 281.177,
-                "temp_max": 282.64,
+                "temp_max": 281.99,
                 "pressure": 990.6,
                 "sea_level": 1029.94,
                 "grnd_level": 990.6,
@@ -74,7 +74,7 @@ weather_data = {
             "main": {
                 "temp": 278.3,
                 "temp_min": 277.566,
-                "temp_max": 278.3,
+                "temp_max": 278.0,
                 "pressure": 992.46,
                 "sea_level": 1032.01,
                 "grnd_level": 992.46,

@@ -1,55 +1,61 @@
-import { useEffect, useState } from 'react'
-import weatherData from '../../../constants/WeatherData'
+import { useState } from 'react'
+// import weatherData from '../../../constants/WeatherData'
 import EChartsReact from 'echarts-for-react'
 
 const dropdownOptions = ['2018-02-19', '2018-02-20', '2018-02-21']
 const SpecificDay = () => {
     const [specificDayData, setSpecificDayData] = useState({})
 
+    const [optn, setOptn] = useState('2018-02-19')
+
     const getSpecificDayData = async () => {
-        const data = weatherData.list.filter(
-            (d) => (d.dt_txt = '2018-02-20')
-        )[0]
+        let data = {}
+        try {
+            data = await fetch(`http://localhost:5000/weather/${optn}`)
+            data = await data.json()
+            data = data[optn][0]
+        } catch (e) {
+            console.log('error', e)
+        }
+        // const data = weatherData.list.filter( (d) => (d.dt_txt === optn))[0]
 
         const option = {
             xAxis: {
-                data: [data.dt_txt],
+                type: 'category',
+                data: ['High', 'Average', 'Low'],
             },
             yAxis: {
-                min: 280,
+                type: 'value',
             },
             series: [
                 {
-                    type: 'candlestick',
                     data: [
-                        [
-                            data.main.temp,
-                            data.main.temp,
-                            data.main.temp_min,
-                            data.main.temp_max,
-                        ],
+                        data.main.temp_max,
+                        data.main.temp,
+                        data.main.temp_min,
                     ],
+                    type: 'bar',
                 },
             ],
             tooltip: {
                 trigger: 'axis',
             },
         }
+
         console.log(option)
 
         setSpecificDayData(option)
     }
-    useEffect(() => {
-        getSpecificDayData()
-    }, [])
 
     return (
         <>
             <div className="flex flex-row   justifycenter">
                 <select
                     className="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                    // value={selectedOption}
-                    // onChange={handleOptionChange}
+                    value={optn}
+                    onChange={(e) => {
+                        setOptn(e.target.value)
+                    }}
                     placeholder="Select a date"
                 >
                     <option value="" disabled>
@@ -61,7 +67,10 @@ const SpecificDay = () => {
                         </option>
                     ))}
                 </select>
-                <div className="flex items-center justify-center mt-4">
+                <div
+                    className="flex items-center justify-center mt-4"
+                    onClick={getSpecificDayData}
+                >
                     <button
                         className="bg-blue-500 hover:bg-blue-600 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
