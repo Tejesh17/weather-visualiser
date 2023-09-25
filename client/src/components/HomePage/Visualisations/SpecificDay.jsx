@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import weatherData from '../../../constants/WeatherData'
+import weatherData from '../../../constants/WeatherData'
 import EChartsReact from 'echarts-for-react'
 
 const dropdownOptions = ['2018-02-19', '2018-02-20', '2018-02-21']
@@ -9,15 +9,15 @@ const SpecificDay = () => {
     const [optn, setOptn] = useState('2018-02-19')
 
     const getSpecificDayData = async () => {
-        let data = {}
-        try {
-            data = await fetch(`http://localhost:5000/weather/${optn}`)
-            data = await data.json()
-            data = data[optn][0]
-        } catch (e) {
-            console.log('error', e)
-        }
-        // const data = weatherData.list.filter( (d) => (d.dt_txt === optn))[0]
+        // let data = {}
+        // try {
+        //     data = await fetch(`http://localhost:5000/weather/${optn}`)
+        //     data = await data.json()
+        //     data = data[optn][0]
+        // } catch (e) {
+        //     console.log('error', e)
+        // }
+        const data = weatherData.list.filter( (d) => (d.dt_txt === optn))[0]
 
         const option = {
             xAxis: {
@@ -41,9 +41,6 @@ const SpecificDay = () => {
                 trigger: 'axis',
             },
         }
-
-        console.log(option)
-
         setSpecificDayData(option)
     }
 
