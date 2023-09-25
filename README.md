@@ -1,11 +1,11 @@
-# Weather Data Visualization Application Documentation
+# Weather Data Visualization Application 
 
 This documentation provides an overview of the Weather Data Visualization Application, which allows users to visualize weather data using two types of visualizations: line charts for average weather over multiple days and bar graphs for high, low, and average weather for a single day.
 
 ## Preview
 
-![Average of All Days][./documentation/screenshots/avg.png]
-![Single Day Statistics][./documentation/screenshots/specific.png]
+![Average of All Days](./documentation/screenshots/avg.png)
+![Single Day Statistics](./documentation/screenshots/specific.png)
 
 ## Website Hosting
 
