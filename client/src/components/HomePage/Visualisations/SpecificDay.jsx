@@ -5,9 +5,10 @@ import EChartsReact from 'echarts-for-react'
 
 const dropdownOptions = ['2018-02-19', '2018-02-20', '2018-02-21']
 const SpecificDay = () => {
-
-    const {specificDaysData, specificDayDate } = useSelector((store)=> store.app)
-    const dispatch = useDispatch();
+    const { specificDaysData, specificDayDate } = useSelector(
+        (store) => store.app
+    )
+    const dispatch = useDispatch()
 
     const getSpecificDayData = async () => {
         // let data = {}
@@ -18,7 +19,9 @@ const SpecificDay = () => {
         // } catch (e) {
         //     console.log('error', e)
         // }
-        const data = weatherData.list.filter( (d) => (d.dt_txt === specificDayDate))[0]
+        const data = weatherData.list.filter(
+            (d) => d.dt_txt === specificDayDate
+        )[0]
 
         const option = {
             xAxis: {
@@ -27,7 +30,7 @@ const SpecificDay = () => {
             },
             yAxis: {
                 type: 'value',
-                min: 275
+                min: 275,
             },
             series: [
                 {
