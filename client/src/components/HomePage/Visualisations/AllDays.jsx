@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import weatherData from '../../../constants/WeatherData'
 import LineChart from 'echarts-for-react'
 
-const AllDays = () => {
+const AllDays = (props) => {
     const [allDaysData, setAllDaysData] = useState({})
 
     const getAllDaysData = async () => {
@@ -42,17 +42,23 @@ const AllDays = () => {
                 trigger: 'axis',
             },
         }
-        console.log(options)
-
         setAllDaysData(options)
     }
     useEffect(() => {
         getAllDaysData()
     }, [])
 
+    const onChartClick = (params) => {
+        props.changeVisualisation(params.name)
+    }
+
+    const chartEvents = {
+        click: onChartClick,
+    }
+
     return (
         <>
-            <LineChart option={allDaysData} />
+            <LineChart option={allDaysData} onEvents={chartEvents} />
         </>
     )
 }

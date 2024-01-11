@@ -5,6 +5,12 @@ import SpecificDay from './Visualisations/SpecificDay'
 
 const Home = () => {
     const [visualisation, setVisualisation] = useState('None')
+    const [date, setDate] = useState('')
+
+    const changeVisualisation = (date) => {
+        setDate(date)
+        setVisualisation('Specific Day')
+    }
 
     return (
         <>
@@ -30,8 +36,10 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            {visualisation === 'All Days' && <AllDays />}
-            {visualisation === 'Specific Day' && <SpecificDay />}
+            {visualisation === 'All Days' && (
+                <AllDays changeVisualisation={changeVisualisation} />
+            )}
+            {visualisation === 'Specific Day' && <SpecificDay date={date} />}
         </>
     )
 }
