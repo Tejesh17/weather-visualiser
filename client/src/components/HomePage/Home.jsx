@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {changeVisualisation} from "../../redux/app"
 import Heading from './Heading'
 import AllDays from './Visualisations/AllDays'
 import SpecificDay from './Visualisations/SpecificDay'
 
 const Home = () => {
-    const [visualisation, setVisualisation] = useState('None')
+
+    const {visualisation} = useSelector((state)=> state.app)
+    const dispatch = useDispatch()
 
     return (
         <>
@@ -15,7 +18,7 @@ const Home = () => {
                     <button
                         className="bg-blue-500 text-white py-1 px-2 rounded mt-1 hover:bg-blue-600 w-1/2 mr-2"
                         onClick={() => {
-                            setVisualisation('Specific Day')
+                            dispatch(changeVisualisation("Specific Day"))
                         }}
                     >
                         View temps for a specific date
@@ -23,7 +26,7 @@ const Home = () => {
                     <button
                         className="bg-orange-500 text-white py-1 px-2 rounded mt-1 hover:bg-orange-600 w-1/2"
                         onClick={() => {
-                            setVisualisation('All Days')
+                            dispatch(changeVisualisation("All Days"))
                         }}
                     >
                         View Average temp for all days

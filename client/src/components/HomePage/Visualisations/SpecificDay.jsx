@@ -1,12 +1,13 @@
-import { useState } from 'react'
 import weatherData from '../../../constants/WeatherData'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSpecificDaysData, setSpecificDayDate } from '../../../redux/app'
 import EChartsReact from 'echarts-for-react'
 
 const dropdownOptions = ['2018-02-19', '2018-02-20', '2018-02-21']
 const SpecificDay = () => {
-    const [specificDayData, setSpecificDayData] = useState({})
 
-    const [optn, setOptn] = useState('2018-02-19')
+    const {specificDaysData, specificDayDate } = useSelector((store)=> store.app)
+    const dispatch = useDispatch();
 
     const getSpecificDayData = async () => {
         // let data = {}
@@ -17,7 +18,7 @@ const SpecificDay = () => {
         // } catch (e) {
         //     console.log('error', e)
         // }
-        const data = weatherData.list.filter( (d) => (d.dt_txt === optn))[0]
+        const data = weatherData.list.filter( (d) => (d.dt_txt === specificDayDate))[0]
 
         const option = {
             xAxis: {
@@ -42,7 +43,8 @@ const SpecificDay = () => {
                 trigger: 'axis',
             },
         }
-        setSpecificDayData(option)
+
+        dispatch(setSpecificDaysData(option))
     }
 
     return (
@@ -50,9 +52,9 @@ const SpecificDay = () => {
             <div className="flex flex-row   justifycenter">
                 <select
                     className="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                    value={optn}
+                    value={specificDayDate}
                     onChange={(e) => {
-                        setOptn(e.target.value)
+                        dispatch(setSpecificDayDate(e.target.value))
                     }}
                     placeholder="Select a date"
                 >
@@ -78,7 +80,7 @@ const SpecificDay = () => {
                 </div>
             </div>
 
-            <EChartsReact option={specificDayData} />
+            <EChartsReact option={specificDaysData} />
         </>
     )
 }
