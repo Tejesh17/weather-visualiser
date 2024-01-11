@@ -1,31 +1,31 @@
 import { useEffect, useState } from 'react'
-// import weatherData from '../../../constants/WeatherData'
+import weatherData from '../../../constants/WeatherData'
 import LineChart from 'echarts-for-react'
 
-const AllDays = () => {
+const AllDays = (props) => {
     const [allDaysData, setAllDaysData] = useState({})
 
     const getAllDaysData = async () => {
-        // const data = weatherData.list.map((d) => {
-        //     return {
-        //         ...(d.dt_txt && { date: d.dt_txt }),
-        //         ...(d.main.temp && { temp: d.main.temp }),
-        //     }
-        // })
-        let data = {}
-        try {
-            data = await fetch('http://localhost:5000/weather')
-            data = await data.json()
-        } catch (e) {
-            console.log('error', e)
-        }
+        const data = weatherData.list.map((d) => {
+            return {
+                ...(d.dt_txt && { date: d.dt_txt }),
+                ...(d.main.temp && { temp: d.main.temp }),
+            }
+        })
 
-        console.log(data)
+        // let data = {}
+        // try {
+        //     data = await fetch('http://localhost:5000/weather')
+        //     data = await data.json()
+        // } catch (e) {
+        //     console.log('error', e)
+        // }
+
         const options = {
             xAxis: {
                 type: 'category',
-                data: data.list.map((d) => d.dt_txt),
-                // data: data.map((d) => d.date),
+                // data: data.list.map((d) => d.dt_txt),
+                data: data.map((d) => d.date),
             },
             yAxis: {
                 type: 'value',
@@ -33,9 +33,8 @@ const AllDays = () => {
             },
             series: [
                 {
-                    // data: [data.map((d) => d.temp)],
-                    data: data.list.map((d) => d.main.temp),
-                    // data: data.map((d) => d.temp),
+                    // data: data.list.map((d) => d.main.temp),
+                    data: data.map((d) => d.temp),
                     type: 'line',
                 },
             ],
@@ -43,17 +42,23 @@ const AllDays = () => {
                 trigger: 'axis',
             },
         }
-        console.log(options)
-
         setAllDaysData(options)
     }
     useEffect(() => {
         getAllDaysData()
     }, [])
 
+    const onChartClick = (params) => {
+        props.changeVisualisation(params.name)
+    }
+
+    const chartEvents = {
+        click: onChartClick,
+    }
+
     return (
         <>
-            <LineChart option={allDaysData} />
+            <LineChart option={allDaysData} onEvents={chartEvents} />
         </>
     )
 }
